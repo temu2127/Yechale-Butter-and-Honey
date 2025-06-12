@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Harvest - Premium Butter & Honey</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #fff9e6;
+            color: #5c3a00;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #ffd700;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #5c3a00;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #5c3a00;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(255, 249, 230, 0.7), rgba(255, 249, 230, 0.7)), 
+                        url('https://images.unsplash.com/photo-1587049352851-8d4e89133924') center/cover;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .owner-photo {
+            width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .owner-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .owner-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .owner-photo:hover img {
+            transform: scale(1.1);
+        }
+        
+        .owner-photo::after {
+            content: "Meet Our Founder - Yechale Mulugeta";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(92, 58, 0, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .owner-photo:hover::after {
+            transform: translateY(0);
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #5c3a00;
+        }
+        
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff9900;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 70px;
+            color: #5c3a00;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: #ff9900;
+        }
+        
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .category-btn {
+            padding: 12px 25px;
+            background-color: transparent;
+            border: 2px solid #ff9900;
+            border-radius: 50px;
+            color: #5c3a00;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background-color: #ff9900;
+            color: white;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-info p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .product-info .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+        
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 217, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+        
+        .product-overlay h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-overlay p {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: #fff0cc;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .about-img {
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.1);
+        }
+        
+        .about-img-large {
+            grid-column: span 2;
+            height: 300px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #5c3a00;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 100px 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background-color: #fff0cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ff9900;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #5c3a00;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: #fff0cc;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-img:hover {
+            transform: scale(1.1);
+        }
+        
+        .testimonial-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info h4 {
+            font-size: 1.2rem;
+            color: #5c3a00;
+        }
+        
+        .testimonial-info p {
+            color: #ff9900;
+            font-weight: 600;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #5c3a00;
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #ff9900;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: #ff9900;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #ff9900;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+
+        /* Modern Contact Styles */
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255,153,0,0.2);
+            transform: translateY(-3px);
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: #ff9900;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item a:hover {
+            color: #ff9900;
+            padding-left: 0;
+        }
+        
+        .qr-code {
+            margin-top: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .qr-code img {
+            width: 120px;
+            height: 120px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff9900;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #e68a00;
+            transform: translateY(-5px);
+        }
+        
+        /* Newsletter Form */
+        .newsletter-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+        }
+        
+        .subscribe-btn {
+            width: 50px;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .subscribe-btn:hover {
+            background-color: #e68a00;
+        }
+        
+        .form-note {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .owner-photo {
+                margin-bottom: 50px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- React and Babel for JSX support -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">yechal Honey and butter</a>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#products">Products</a>
+                    <a href="#about">About</a>
+                    <a href="#benefits">Benefits</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="owner-photo">
+                    <img src="pre.PNG" alt="Farm Owner">
+                </div>
+                <div class="hero-text">
+                    <h1>Pure, Natural Butter & Honey</h1>
+                    <p>Experience the rich, authentic flavors of our handcrafted butter and honey, made with love and tradition passed down through generations.</p>
+                    <a href="#products" class="btn">Explore Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Premium Products</h2>
+            <div class="product-categories">
+                <button class="category-btn active">All Products</button>
+                <button class="category-btn">Butter</button>
+                <button class="category-btn">Honey</button>
+                <button class="category-btn">Combos</button>
+            </div>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="kiba.jpg" alt=" Butter">
+                    </div>
+                    <div class="product-info">
+                        <h3>Creamy Artisan Butter</h3>
+                        <p>Made from the richest cream, slow-churned for perfect texture</p>
+                        <span class="price">call📞0975601900</span>
+                    </div>
+                    <div class="product-overlay">
+                        <h3>Creamy Artisan Butter</h3>
+                        <p>Our signature butter, made with traditional methods for unparalleled richness. Perfect for baking, cooking, or simply spreading on fresh bread.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="haney.jpg" alt="Wildflower Honey">
+                    </div>
+                    <div class="product-info">
+                        <h3>Wildflower Honey</h3>
+                        <p>Raw, unfiltered honey from diverse floral sources</p>
+                        <span class="price">call📞0975601900</span>
+                    </div>
+                    <div class="product-overlay">
+                        <h3>Wildflower Honey</h3>
+                        <p>Harvested from bees that forage on wildflowers, this honey has complex floral notes and natural health benefits. Never heated or processed.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="butter.jpg" alt="Salted Butter">
+                    </div>
+                    <div class="product-info">
+                        <h3> Premium gojjam Butter</h3>
+                        <p>Artisan Premium gojjam butter with hand-harvested sea salt crystals</p>
+                        <span class="price">call📞0975601900</span>
+                    </div>
+                    <div class="product-overlay">
+                        <h3> Butter</h3>
+                        <p>A perfect balance of creamy butter . Ideal for finishing steaks, vegetables, or elevating your morning toast.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="mare1.jpg" alt=" Honey">
+                    </div>
+                    <div class="product-info">
+                        <h3>Premium gojjam Honey</h3>
+                        <p>Rare honey with exceptional antibacterial properties</p>
+                        <span class="price">call📞0975601900</span>
+                    </div>
+                    <div class="product-overlay">
+                        <h3>Premium gojjam Honey</h3>
+                        <p>Our UMF 15+ certified Manuka honey comes from New Zealand's pristine forests. A powerful natural remedy and luxurious sweetener.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="mare2.jpg" alt="Honey Butter">
+                    </div>
+                    <div class="product-info">
+                        <h3>Honey Infused Butter</h3>
+                        <p>The perfect blend of our creamiest  wildflower honey</p>
+                        <span class="price">call📞0975601900</span>
+                    </div>
+                    <div class="product-overlay">
+                        <h3>Honey Infused Butter</h3>
+                        <p>A match made in heaven! Our signature butter blended with just enough wildflower honey for a subtly sweet, spreadable delight.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="kefo.jpg" alt="Honeycomb">
+                    </div>
+                    <div class="product-info">
+                        <h3>Fresh Honeycomb</h3>
+                        <p>Pure, unprocessed honeycomb sections</p>
+                        <span class="price">call📞0975601900</span>
+                    </div>
+                    <div class="product-overlay">
+                        <h3>Fresh Honeycomb</h3>
+                        <p>Experience honey as nature intended - in the comb! Chew the wax like gum or spread the honeycomb on warm bread for an unforgettable treat.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content">
+                <div class="about-images">
+                    <div class="about-img">
+                        <img src="milk.jpg" alt="Farm">
+                    </div>
+                    <div class="about-img">q
+                        <img src="kiba2.jpg" alt="Beekeeping">
+                    </div>
+                    <div class="about-img about-img-large">
+                        <img src="kiba.jpg" alt="Butter Making">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>Yechal Mulugeta</h2>
+                    <p>For over six years, Yechal Mulugeta (40) has been crafting exceptional honey and traditional butter in the fertile highlands of Sekela, Gojjam, in Ethiopia's Amhara region. Drawing on generations of local wisdom, Yechal maintains traditional beehives that produce richly flavored honey from Sekela's diverse wildflowers. His golden butter, churned using time-honored methods, carries the authentic taste of Ethiopian dairy tradition. All products are made completely naturally, without additives, preserving both their health benefits and cultural significance. Yechal sources milk from smallholder farmers in his community, supporting local livelihoods while ensuring quality. What began as a family tradition has grown into a respected business, with Yechal's products gaining recognition in local markets and beyond. The distinct floral notes of his honey and the creamy richness of his butter stand as testaments to Sekela's unique ecosystem and Ethiopia's rich culinary heritage.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Products</h2>
+            <div class="benefits-grid">
+                <!-- Benefit 1 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>100% Natural</h3>
+                    <p>No artificial ingredients, preservatives, or processing. Just pure, simple ingredients from nature.</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Health Benefits</h3>
+                    <p>Rich in vitamins, minerals, and antioxidants. Our raw honey contains natural enzymes and probiotics.</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>Sustainable Farming</h3>
+                    <p>We practice regenerative agriculture that improves soil health and supports biodiversity.</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Wildflower Foraging</h3>
+                    <p> Bees collect nectar from indigenous plants like "gesho" (Rhamnus prinoides) and white clover.</p>
+                </div>
+                
+                <!-- Benefit 5 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Small Batch</h3>
+                    <p>Everything is made in small quantities with meticulous attention to detail.</p>
+                </div>
+                
+                <!-- Benefit 6 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>Flavor Guarantee</h3>
+                    <p>If you don't love our products, we'll refund your money - no questions asked.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="injera.jpg" alt="Sarah J.">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Name: Dr. Selamawit Gebre</h4>
+                            <p>medical doctor</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>"I've tried dozens of artisanal butters, but Golden Harvest stands out. The flavor is rich and complex with a perfect texture. Their honey butter is my secret ingredient for the best biscuits!"</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="tij.jpg" alt="Elfenesh A.">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Elfenesh Assefa</h4>
+                            <p>T'ej Bet Owner</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>"Yechal honey gives my t'ej the perfect balance of sweetness and floral notes. Customers say it reminds them of traditional honey wine from Tigray region."</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="dr.jpg" alt="Dr. Girma T.">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Dr. Girma Teshome</h4>
+                            <p>Public Health Officer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>"As a health professional, I recommend Yechal products in our nutrition programs. Their butter provides essential fats, and their raw honey has natural antibacterial properties."</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="tila.jpg" alt="maryamawit">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Maryamawit Melaku</h4>
+                            <p>T'ila Bet Owner (Honey Seller)</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>"Yechal honey from the Bale Mountains has the perfect consistency and floral aroma. My customers at Mercato specifically ask for it by name."</p>
+                    </div>
+                </div>
+
+                <!-- 6. Injera Gagari (Injera Maker) -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="gagari.jpg" alt="Mulu B.">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Mulu Bekele</h4>
+                            <p>Injera Gagari (Professional Injera Maker)</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>"For perfect injera - golden color with those tiny holes - I only use Yechal butter. And when served with their honey? Even government ministers request my injera!"</p>
+                    </div>
+                </div>
+
+                <!-- 7. Traditional Coffee Ceremony Host -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-img">
+                            <img src="coffie.jpg" alt="Zewditu A.">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Zewditu Abebe</h4>
+                            <p>Buna Tetu (Coffee Ceremony Host)</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>"My coffee ceremony is famous in Gondar because I serve it with Yechal honey and butter-infused popcorn. The combination makes guests feel truly honored."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Golden Harvest</h3>
+                    <p>Bringing you the finest butter and honey products since 1952. Family owned and operated with pride.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#products">Products</a>
+                    <a href="#about">About Us</a>
+                    <a href="#benefits">Benefits</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-methods">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+251900940037">+251975601900</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:yechale@example.com">yechale@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>ethiopia -gojjam -Sekela</span>
+                        </div>
+                    </div>
+                    <div class="qr-code">
+                        <img src="map.jpg" alt="map">
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new products and special offers.</p>
+                    <!-- React Newsletter Component -->
+                    <div id="newsletter-form"></div>
+                    <script type="text/babel">
+                        class NewsletterForm extends React.Component {
+                            constructor(props) {
+                                super(props);
+                                this.state = {
+                                    email: '',
+                                    submitted: false,
+                                    error: ''
+                                };
+                                this.handleChange = this.handleChange.bind(this);
+                                this.handleSubmit = this.handleSubmit.bind(this);
+                            }
+                            
+                            handleChange(event) {
+                                this.setState({email: event.target.value});
+                            }
+                            
+                            handleSubmit(event) {
+                                event.preventDefault();
+                                if (!this.state.email.includes('@')) {
+                                    this.setState({error: 'Please enter a valid email address'});
+                                    return;
+                                }
+                                // In a real app, you would send this to your backend
+                                console.log('Submitted email:', this.state.email);
+                                this.setState({
+                                    submitted: true,
+                                    error: ''
+                                });
+                            }
+                            
+                            render() {
+                                if (this.state.submitted) {
+                                    return (
+                                        <div className="newsletter-success">
+                                            <p>Thank you for subscribing!</p>
+                                        </div>
+                                    );
+                                }
+                                
+                                return (
+                                    <form className="newsletter-form" onSubmit={this.handleSubmit}>
+                                        <div className="form-group">
+                                            <input 
+                                                type="email" 
+                                                placeholder="Your email address" 
+                                                value={this.state.email}
+                                                onChange={this.handleChange}
+                                                required
+                                            />
+                                            <button type="submit" className="subscribe-btn">
+                                                <i className="fas fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                        {this.state.error && <p className="error-message">{this.state.error}</p>}
+                                        <p className="form-note">We respect your privacy. Unsubscribe at any time.</p>
+                                    </form>
+                                );
+                            }
+                        }
+                        
+                        ReactDOM.render(
+                            <NewsletterForm />,
+                            document.getElementById('newsletter-form')
+                        );
+                    </script>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Golden Harvest Butter & Honey. All Rights Reserved(🧑🏿‍💻developer:-Temu-📞0900940037).</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <!-- JavaScript for Interactive Elements -->
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // Product Category Filtering
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const category = button.textContent.toLowerCase();
+                
+                // Filter products
+                productCards.forEach(card => {
+                    const productCategory = card.querySelector('h3').textContent.toLowerCase();
+                    
+                    if (category === 'all products' || 
+                        productCategory.includes(category) || 
+                        (category === 'combos' && productCategory.includes('combo'))) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Java Integration Example (would typically be server-side)
+        // This is just a simulation of how you might handle form data
+        class FormProcessor {
+            constructor() {
+                console.log("Form processor initialized (simulating Java backend)");
+            }
+            
+            processFormData(data) {
+                // In a real application, this would send data to a Java backend
+                console.log("Processing form data:", data);
+                return {
+                    status: "success",
+                    message: "Thank you for your submission!"
+                };
+            }
+        }
+        
+        // Initialize our "Java" form processor
+        const formProcessor = new FormProcessor();
+        
+        // Example of processing the newsletter form
+        function handleNewsletterSubmit(email) {
+            const response = formProcessor.processFormData({ email });
+            console.log(response);
+            alert(response.message);
+        }
+    </script>
+</body>
+</html>
